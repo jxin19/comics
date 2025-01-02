@@ -59,7 +59,7 @@ class ViewStatsCommandServiceImpl(
      * 3. 작품별로 조회수를 집계하여 MongoDB에 Bulk Update
      * 4. 마지막으로 처리된 로그 ID를 Redis에 저장
      */
-    @CacheEvict(cacheNames = ["topViewedWorks"])
+    @CacheEvict(cacheNames = ["topViewedWorks"], allEntries = true)
     override fun loadLatestViewLogs() {
         var lastViewLogId = redisTemplate.opsForValue().get(LATEST_VIEW_LOG_ID_KEY)
         var maxLogId = lastViewLogId
