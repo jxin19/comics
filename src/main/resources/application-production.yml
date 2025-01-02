@@ -1,0 +1,95 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://comics-db:5432/comics
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: password
+
+  redis:
+    host: comics-redis
+    port: 6379
+    password:
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        jdbc:
+          batch_size: 100
+          batch_versioned_data: true
+          time_zone: Asia/Seoul
+        order_updates: true
+    open-in-view: false
+
+  sql:
+    init:
+      mode: always
+
+  flyway:
+    url: jdbc:postgresql://comics-db:5432/comics
+    user: postgres
+    password: password
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    baseline-version: 1
+    enabled: true
+
+  data:
+    mongodb:
+      uri: mongodb://root:password@comics-mongodb:27017/comics?authSource=admin
+
+  kafka:
+    bootstrap-servers: comics-kafka:29092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+      compression-type: zstd
+      compression-level: 6
+      batch-size: 500
+      linger-ms: 100
+      acks: all
+      retries: 3
+      delivery-timeout-ms: 120000
+      max-in-flight-requests-per-connection: 5
+      enable-idempotence: true
+      request-timeout-ms: 30000
+      properties:
+        schema.registry.url: http://comics-schema-registry:8081
+    consumer:
+      group-id: comics-message-processor
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+      max-poll-records: 500
+      enable-auto-commit: false
+      properties:
+        schema.registry.url: http://comics-schema-registry:8081
+        specific.avro.reader: true
+        partition.assignment.strategy: org.apache.kafka.clients.consumer.RoundRobinAssignor
+    listener:
+      ack-mode: MANUAL_IMMEDIATE
+      type: BATCH
+      concurrency: 1
+
+jwt:
+  secret-key : ubLCgCkqfbqE7PUIWdJUeCkXzsim9ZNKubLCgCkqfbqE7PUIWdJUeCkXzsim9ZNK
+  access-token-expire-time : 300
+  refresh-token-expire-time : 7200
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+  api-docs:
+    path: /api-docs
+  version: 3.0.0
+
+comics:
+  init-purchase-stats: true
+  init-view-log-stats: true
+  cache:
+    ttl: 1800
