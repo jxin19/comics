@@ -40,6 +40,11 @@ class WorkPricingPolicy(
         require(endDate == null || startDate.isBefore(endDate)) {
             "종료일은 시작일보다 이후여야 합니다."
         }
+
+        require((_isFree && (price == null || price?.value == BigDecimal.ZERO))
+                || (!_isFree && price != null && price?.value!! > BigDecimal.ZERO)) {
+            "무료 정책인 경우 가격은 0이거나 null이어야 하며, 유료 정책인 경우 가격은 0보다 커야 합니다."
+        }
     }
 
     val workEntity: Work

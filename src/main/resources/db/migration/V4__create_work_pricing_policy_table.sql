@@ -4,14 +4,23 @@ CREATE TABLE work_pricing_policy
     work_pricing_policy_id BIGSERIAL PRIMARY KEY,
     work_id                BIGINT                   NOT NULL,
     is_free                BOOLEAN                  NOT NULL,
-    price                  DECIMAL(10, 2),
+    price                  DECIMAL(10, 2) CHECK (price IS NULL OR price >= 0),
     start_date             TIMESTAMP WITH TIME ZONE NOT NULL,
     end_date               TIMESTAMP WITH TIME ZONE,
     created_at             TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at             TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT valid_date_range CHECK (end_date IS NULL OR start_date < end_date),
-    CONSTRAINT fk_work_pricing_policy_work FOREIGN KEY (work_id)
-        REFERENCES work (work_id) ON DELETE CASCADE
+
+    CONSTRAINT valid_date_range
+        CHECK (end_date IS NULL OR start_date < end_date),
+
+    CONSTRAINT valid_price_policy
+        CHECK (
+            (is_free = true AND (price IS NULL OR price = 0)) OR
+            (is_free = false AND price > 0)
+        ),
+
+    CONSTRAINT fk_work_pricing_policy_work
+        FOREIGN KEY (work_id) REFERENCES work (work_id) ON DELETE CASCADE
 );
 
 CREATE INDEX idx_work_pricing_policy_work_id_date ON work_pricing_policy (work_id, start_date, end_date);

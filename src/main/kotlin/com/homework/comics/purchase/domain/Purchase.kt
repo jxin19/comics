@@ -12,8 +12,8 @@ import java.time.Instant
 @Table(
     name = "purchase",
     indexes = [
-        Index(name = "idx_purchase_member_id", columnList = "member_id"),
-        Index(name = "idx_purchase_work_id", columnList = "work_id")
+        Index(name = "idx_purchase_member_date", columnList = "member_id,purchased_at DESC"),
+        Index(name = "idx_purchase_work_date", columnList = "work_id,purchased_at DESC")
     ],
     uniqueConstraints = [
         UniqueConstraint(name = "unique_member_work", columnNames = ["member_id", "work_id"])

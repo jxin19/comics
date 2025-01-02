@@ -10,7 +10,7 @@ import jakarta.persistence.Column
 @Access(AccessType.FIELD)
 class EmailAddress : StringValidator {
 
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "email", nullable = false, unique = true, length = 120)
     private var _value: String = ""
 
     constructor()

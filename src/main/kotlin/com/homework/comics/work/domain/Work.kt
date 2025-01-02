@@ -10,7 +10,9 @@ import jakarta.persistence.*
 @Table(
     name = "work",
     indexes = [
-        Index(name = "idx_work_title", columnList = "title")
+        Index(name = "idx_work_title", columnList = "title"),
+        Index(name = "idx_work_author", columnList = "author"),
+        Index(name = "idx_work_status", columnList = "is_active, is_adult_only")
     ]
 )
 class Work(

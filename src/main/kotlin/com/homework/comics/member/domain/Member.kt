@@ -11,7 +11,8 @@ import jakarta.persistence.*
 @Table(
     name = "member",
     indexes = [
-        Index(name = "idx_member_username", columnList = "username")
+        Index(name = "idx_member_username", columnList = "username"),
+        Index(name = "idx_member_email", columnList = "email")
     ]
 )
 class Member(
