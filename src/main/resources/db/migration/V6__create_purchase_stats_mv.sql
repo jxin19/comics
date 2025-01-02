@@ -1,17 +1,16 @@
 CREATE
 MATERIALIZED VIEW purchase_stats_mv AS
 SELECT w.work_id,
-       COUNT(*)          as total_purchases,
-       SUM(p.paid_price) as total_revenue,
-       NOW()             as last_updated_at
+       COUNT(p.purchase_id) as total_purchases,
+       SUM(p.paid_price)    as total_revenue,
+       NOW()                as last_updated_at
 FROM work w
          LEFT JOIN purchase p ON w.work_id = p.work_id
 GROUP BY w.work_id;
 
 CREATE UNIQUE INDEX idx_purchase_stats_mv_work_id ON purchase_stats_mv (work_id);
 CREATE INDEX idx_purchase_stats_mv_ranking
-    ON purchase_stats_mv (total_purchases DESC, total_revenue DESC)
-    INCLUDE (work_id);
+    ON purchase_stats_mv (total_purchases DESC, total_revenue DESC) INCLUDE (work_id);
 
 
 -- 갱신 함수
