@@ -166,7 +166,8 @@ src
 
 ## 5. 주요 코드 설명
 
-### 대용량 트래픽 처리
+### 작품 조회 대용량 트래픽 처리
+![다이그램](./asset/purchase.png)
 - Redis를 활용한 캐시 레이어 구현(`WorkQueryServiceImpl`참고)
   ```
     @Cacheable(cacheNames = ["work"], key = "#id + '::' + @authenticationFacade.isAdultVerified()")
@@ -211,7 +212,8 @@ src
         }
       ```
 
-### 작품 조회 데이터 처리 파이프라인
+### 작품 조회 데이터 처리
+![다이그램](./asset/purchase.png)
 - 데이터 처리
   - PostgreSQL의 기본 테이블에 구매 데이터 저장
 - 통계 데이터 집계
