@@ -1,0 +1,134 @@
+services:
+  comics-db:
+    image: postgres:17.2-alpine
+    container_name: comics-db
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: comics
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      TZ: Asia/Seoul
+    networks:
+      - comics-network
+
+  comics-mongodb:
+    image: mongo:7.0
+    container_name: comics-mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: comics
+      MONGODB_AUTH_MECHANISM: SCRAM-SHA-1
+      TZ: Asia/Seoul
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - comics-network
+
+  comics-redis:
+    image: redis:latest
+    container_name: comics-redis
+    ports:
+      - 6378:6379
+    volumes:
+      - ./redis/data:/data
+      - ./redis/conf/redis.conf:/usr/local/conf/redis.conf
+    labels:
+      - name=redis
+      - mode=standalone
+    command: redis-server /usr/local/conf/redis.conf
+    networks:
+      - comics-network
+
+  comics-zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    container_name: comics-zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - 2181:2181
+    networks:
+      - comics-network
+
+  comics-kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: comics-kafka
+    ports:
+      - 9092:9092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: comics-zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://comics-kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+    depends_on:
+      - comics-db
+      - comics-mongodb
+      - comics-redis
+      - comics-zookeeper
+    networks:
+      - comics-network
+
+  comics-schema-registry:
+    image: confluentinc/cp-schema-registry:latest
+    container_name: comics-schema-registry
+    ports:
+      - 8081:8081
+    environment:
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://comics-kafka:29092,PLAINTEXT_HOST://localhost:9092
+      SCHEMA_REGISTRY_HOST_NAME: comics-schema-registry
+      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+    depends_on:
+      - comics-zookeeper
+      - comics-kafka
+    networks:
+      - comics-network
+
+  comics-kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: comics-kafka-ui
+    ports:
+      - 9091:8080
+    environment:
+      KAFKA_CLUSTERS_0_NAME: comics-kafka
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: comics-kafka:29092
+      KAFKA_CLUSTERS_0_ZOOKEEPER: comics-zookeeper:2181
+      KAFKA_CLUSTERS_0_SCHEMAREGISTRY: http://comics-schema-registry:8081
+    depends_on:
+      - comics-zookeeper
+      - comics-kafka
+      - comics-schema-registry
+    networks:
+      - comics-network
+
+  comics-api:
+    container_name: comics-api
+    build:
+      dockerfile: Dockerfile
+      context: .
+    ports:
+      - 8080:8080
+    depends_on:
+      - comics-db
+      - comics-mongodb
+      - comics-redis
+      - comics-zookeeper
+      - comics-kafka
+      - comics-schema-registry
+    networks:
+      - comics-network
+
+volumes:
+  mongo-data:
+    driver: local
+
+networks:
+  comics-network:
+    driver: bridge
