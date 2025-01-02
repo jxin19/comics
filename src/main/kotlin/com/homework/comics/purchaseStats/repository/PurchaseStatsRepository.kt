@@ -11,7 +11,7 @@ interface PurchaseStatsRepository : JpaRepository<PurchaseStats, Long> {
         FROM PurchaseStats p 
         JOIN FETCH p.work w 
         WHERE w._isActive = true
-        ORDER BY p.totalPurchases DESC
+        ORDER BY p.totalPurchases DESC, p.totalRevenue DESC
     """)
     fun findTopPurchasedWorks(pageable: Pageable): List<PurchaseStats>
 }
