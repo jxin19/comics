@@ -283,10 +283,19 @@ src
 - 다음 3번 절차는 Docker를 실행하지 않고 애플리케이션을 실행하는 절차입니다.
 
 
-## 테스트 실행
+## 기능 테스트 실행
 
 `./gradlew test`
 
+
+## 부하 테스트 실행
+
+1. k6 설치
+   `brew install k6`
+2. k6 설치 확인
+   `k6 version`
+3. 스크립트 실행
+   `k6 run request/stress-test.js`
 
 ## API 문서
 애플리케이션 실행 후 http://localhost:8080/swagger-ui.html 에서 Swagger UI를 통해 API 문서를 확인할 수 있습니다.
