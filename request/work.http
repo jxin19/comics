@@ -1,0 +1,46 @@
+### 작품 상세 조회
+GET http://localhost:8080/work/1
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJtZW1iZXJJZCI6MSwiZW1haWxBZGRyZXNzIjoidGVzdDFAdGVzdC5jb20iLCJpc0FkdWx0VmVyaWZpZWQiOnRydWUsImlhdCI6MTczNTc4MjY0MywiZXhwIjoxNzM1Nzg5ODQzfQ.lED5Jd584oB4Cua-fo9K8yE1Xv9JQzGRipszgG47TFeU8I1NTloR-PJA1Igdbb8b
+
+### 작품 상세 조회 반복 요청
+< {%
+    const iterations = 1000;
+    let workIds = []
+    for (let i = 0; i < iterations; i++) {
+        const randomWorkId = Math.floor(Math.random() * 3000) + 1;
+        workIds.push(randomWorkId)
+    }
+    request.variables.set("workId", workIds);
+%}
+GET http://localhost:8080/work/{{workId}}
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJtZW1iZXJJZCI6MSwiZW1haWxBZGRyZXNzIjoidGVzdDFAdGVzdC5jb20iLCJpc0FkdWx0VmVyaWZpZWQiOnRydWUsImlhdCI6MTczNTc4MjY0MywiZXhwIjoxNzM1Nzg5ODQzfQ.lED5Jd584oB4Cua-fo9K8yE1Xv9JQzGRipszgG47TFeU8I1NTloR-PJA1Igdbb8b
+
+### 작품 생성
+POST http://localhost:8080/work
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJtZW1iZXJJZCI6MSwiZW1haWxBZGRyZXNzIjoidGVzdDFAdGVzdC5jb20iLCJpc0FkdWx0VmVyaWZpZWQiOnRydWUsImlhdCI6MTczNTc4MjY0MywiZXhwIjoxNzM1Nzg5ODQzfQ.lED5Jd584oB4Cua-fo9K8yE1Xv9JQzGRipszgG47TFeU8I1NTloR-PJA1Igdbb8b
+
+{
+  "title": "원피스",
+  "description": "해적왕이 되는 소년의 모험 이야기",
+  "author": "오다 에이치로",
+  "isActive": true
+}
+
+### 작품 수정
+PUT http://localhost:8080/work/5001
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJtZW1iZXJJZCI6MSwiZW1haWxBZGRyZXNzIjoidGVzdDFAdGVzdC5jb20iLCJpc0FkdWx0VmVyaWZpZWQiOnRydWUsImlhdCI6MTczNTc4MjY0MywiZXhwIjoxNzM1Nzg5ODQzfQ.lED5Jd584oB4Cua-fo9K8yE1Xv9JQzGRipszgG47TFeU8I1NTloR-PJA1Igdbb8b
+
+{
+  "title": "원피스 (수정)",
+  "description": "해적왕을 꿈꾸는 소년 루피의 모험 이야기",
+  "author": "오다 에이치로",
+  "isActive": true
+}
+
+### 작품 삭제
+DELETE http://localhost:8080/work/5001
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJtZW1iZXJJZCI6MSwiZW1haWxBZGRyZXNzIjoidGVzdDFAdGVzdC5jb20iLCJpc0FkdWx0VmVyaWZpZWQiOnRydWUsImlhdCI6MTczNTc4MjY0MywiZXhwIjoxNzM1Nzg5ODQzfQ.lED5Jd584oB4Cua-fo9K8yE1Xv9JQzGRipszgG47TFeU8I1NTloR-PJA1Igdbb8b

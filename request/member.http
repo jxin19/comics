@@ -1,0 +1,48 @@
+### 회원 가입
+POST http://localhost:8080/member
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "emailAddress": "test@example.com",
+  "password": "password123!"
+}
+
+### 회원 정보 수정
+PUT http://localhost:8080/member
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJtZW1iZXJJZCI6MSwiZW1haWxBZGRyZXNzIjoidGVzdDFAdGVzdC5jb20iLCJpc0FkdWx0VmVyaWZpZWQiOnRydWUsImlhdCI6MTczNTc4MjY0MywiZXhwIjoxNzM2MDgyNjQzfQ.5jWb-c9IMhaQ-k3HgG0zGeTjpz5pLwgNMcu72QiS3nmWGFWgDvJgzvkpyqWBSYSC
+
+{
+  "username": "test1",
+  "emailAddress": "test1@test.com",
+  "password": "password123!"
+}
+
+### 성인인증
+PUT http://localhost:8080/member/verify-adult/990101-1234567
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJtZW1iZXJJZCI6MSwiZW1haWxBZGRyZXNzIjoidGVzdDFAdGVzdC5jb20iLCJpc0FkdWx0VmVyaWZpZWQiOnRydWUsImlhdCI6MTczNTc4MjY0MywiZXhwIjoxNzM2MDgyNjQzfQ.5jWb-c9IMhaQ-k3HgG0zGeTjpz5pLwgNMcu72QiS3nmWGFWgDvJgzvkpyqWBSYSC
+
+### 로그인
+POST http://localhost:8080/member/login
+Content-Type: application/json
+
+{
+  "username": "test2",
+  "emailAddress": "test2@test.com",
+  "password": "password123!"
+}
+
+### 토큰 재발급
+POST http://localhost:8080/member/refresh-token
+Refresh-Token: eyJhbGciOiJIUzM4NCJ9.eyJtZW1iZXJJZCI6MSwiZW1haWxBZGRyZXNzIjoidGVzdDFAdGVzdC5jb20iLCJpc0FkdWx0VmVyaWZpZWQiOnRydWUsImlhdCI6MTczNTc4MjY0MywiZXhwIjoxNzM1Nzg5ODQzfQ.lED5Jd584oB4Cua-fo9K8yE1Xv9JQzGRipszgG47TFeU8I1NTloR-PJA1Igdbb8b
+
+### 로그아웃
+POST http://localhost:8080/member/logout
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJtZW1iZXJJZCI6MSwiZW1haWxBZGRyZXNzIjoidGVzdDFAdGVzdC5jb20iLCJpc0FkdWx0VmVyaWZpZWQiOnRydWUsImlhdCI6MTczNTc4MjY0MywiZXhwIjoxNzM2MDgyNjQzfQ.5jWb-c9IMhaQ-k3HgG0zGeTjpz5pLwgNMcu72QiS3nmWGFWgDvJgzvkpyqWBSYSC
+Refresh-Token: eyJhbGciOiJIUzM4NCJ9.eyJtZW1iZXJJZCI6MSwiZW1haWxBZGRyZXNzIjoidGVzdDFAdGVzdC5jb20iLCJpc0FkdWx0VmVyaWZpZWQiOnRydWUsImlhdCI6MTczNTc4MjY0MywiZXhwIjoxNzM1Nzg5ODQzfQ.lED5Jd584oB4Cua-fo9K8yE1Xv9JQzGRipszgG47TFeU8I1NTloR-PJA1Igdbb8b
+
+### 회원 상세 조회
+GET http://localhost:8080/member
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJtZW1iZXJJZCI6MSwiZW1haWxBZGRyZXNzIjoidGVzdDFAdGVzdC5jb20iLCJpc0FkdWx0VmVyaWZpZWQiOnRydWUsImlhdCI6MTczNTc4MjY0MywiZXhwIjoxNzM2MDgyNjQzfQ.5jWb-c9IMhaQ-k3HgG0zGeTjpz5pLwgNMcu72QiS3nmWGFWgDvJgzvkpyqWBSYSC

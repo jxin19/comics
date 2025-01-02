@@ -1,0 +1,24 @@
+### 작품별 조회 이력 조회 (기본값)
+GET http://localhost:8080/view-log?workId=1
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJtZW1iZXJJZCI6MSwiZW1haWxBZGRyZXNzIjoidGVzdDFAdGVzdC5jb20iLCJpc0FkdWx0VmVyaWZpZWQiOnRydWUsImlhdCI6MTczNTc4MjY0MywiZXhwIjoxNzM1Nzg5ODQzfQ.lED5Jd584oB4Cua-fo9K8yE1Xv9JQzGRipszgG47TFeU8I1NTloR-PJA1Igdbb8b
+
+### 작품별 조회 이력 조회 (모든 파라미터 사용)
+GET http://localhost:8080/view-log?workId=1&memberId=1&startDate=2025-01-01T00:00:00Z&endDate=2025-01-31T23:59:59Z&page=1&size=10
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJtZW1iZXJJZCI6MSwiZW1haWxBZGRyZXNzIjoidGVzdDFAdGVzdC5jb20iLCJpc0FkdWx0VmVyaWZpZWQiOnRydWUsImlhdCI6MTczNTc4MjY0MywiZXhwIjoxNzM1Nzg5ODQzfQ.lED5Jd584oB4Cua-fo9K8yE1Xv9JQzGRipszgG47TFeU8I1NTloR-PJA1Igdbb8b
+
+### 작품별 조회 이력 조회 (회원 필터링)
+GET http://localhost:8080/view-log?workId=1&memberId=1
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJtZW1iZXJJZCI6MSwiZW1haWxBZGRyZXNzIjoidGVzdDFAdGVzdC5jb20iLCJpc0FkdWx0VmVyaWZpZWQiOnRydWUsImlhdCI6MTczNTc4MjY0MywiZXhwIjoxNzM1Nzg5ODQzfQ.lED5Jd584oB4Cua-fo9K8yE1Xv9JQzGRipszgG47TFeU8I1NTloR-PJA1Igdbb8b
+
+### 작품별 조회 이력 조회 (기간 필터링)
+GET http://localhost:8080/view-log?workId=1&startDate=2025-01-01T00:00:00Z&endDate=2025-01-31T23:59:59Z
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJtZW1iZXJJZCI6MSwiZW1haWxBZGRyZXNzIjoidGVzdDFAdGVzdC5jb20iLCJpc0FkdWx0VmVyaWZpZWQiOnRydWUsImlhdCI6MTczNTc4MjY0MywiZXhwIjoxNzM1Nzg5ODQzfQ.lED5Jd584oB4Cua-fo9K8yE1Xv9JQzGRipszgG47TFeU8I1NTloR-PJA1Igdbb8b
+
+### 작품별 조회 이력 조회 (페이징)
+GET http://localhost:8080/view-log?workId=1&page=1&size=10
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJtZW1iZXJJZCI6MSwiZW1haWxBZGRyZXNzIjoidGVzdDFAdGVzdC5jb20iLCJpc0FkdWx0VmVyaWZpZWQiOnRydWUsImlhdCI6MTczNTc4MjY0MywiZXhwIjoxNzM1Nzg5ODQzfQ.lED5Jd584oB4Cua-fo9K8yE1Xv9JQzGRipszgG47TFeU8I1NTloR-PJA1Igdbb8b

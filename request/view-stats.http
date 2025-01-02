@@ -1,0 +1,3 @@
+### 조회수 기준 인기 작품 목록 조회 - 기본값(10개)
+GET http://localhost:8080/view-stats/top-viewed?limit=10
+Accept: application/json

@@ -1,0 +1,19 @@
+### 구매 내역 상세 조회
+GET http://localhost:8080/purchase/1
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJtZW1iZXJJZCI6MSwiZW1haWxBZGRyZXNzIjoidGVzdDFAdGVzdC5jb20iLCJpc0FkdWx0VmVyaWZpZWQiOnRydWUsImlhdCI6MTczNTc4MjY0MywiZXhwIjoxNzM1Nzg5ODQzfQ.lED5Jd584oB4Cua-fo9K8yE1Xv9JQzGRipszgG47TFeU8I1NTloR-PJA1Igdbb8b
+
+### 회원별 구매 내역 조회
+GET http://localhost:8080/purchase/member/1
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJtZW1iZXJJZCI6MSwiZW1haWxBZGRyZXNzIjoidGVzdDFAdGVzdC5jb20iLCJpc0FkdWx0VmVyaWZpZWQiOnRydWUsImlhdCI6MTczNTc4MjY0MywiZXhwIjoxNzM1Nzg5ODQzfQ.lED5Jd584oB4Cua-fo9K8yE1Xv9JQzGRipszgG47TFeU8I1NTloR-PJA1Igdbb8b
+
+### 작품별 구매 내역 조회
+GET http://localhost:8080/purchase/work/1
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJtZW1iZXJJZCI6MSwiZW1haWxBZGRyZXNzIjoidGVzdDFAdGVzdC5jb20iLCJpc0FkdWx0VmVyaWZpZWQiOnRydWUsImlhdCI6MTczNTc4MjY0MywiZXhwIjoxNzM1Nzg5ODQzfQ.lED5Jd584oB4Cua-fo9K8yE1Xv9JQzGRipszgG47TFeU8I1NTloR-PJA1Igdbb8b
+
+### 작품 구매
+POST http://localhost:8080/purchase/work/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJtZW1iZXJJZCI6MSwiZW1haWxBZGRyZXNzIjoidGVzdDFAdGVzdC5jb20iLCJpc0FkdWx0VmVyaWZpZWQiOnRydWUsImlhdCI6MTczNTc4MjY0MywiZXhwIjoxNzM1Nzg5ODQzfQ.lED5Jd584oB4Cua-fo9K8yE1Xv9JQzGRipszgG47TFeU8I1NTloR-PJA1Igdbb8b
