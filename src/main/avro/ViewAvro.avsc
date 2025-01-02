@@ -1,0 +1,10 @@
+{
+  "namespace": "com.homework.comics.viewLog.application.dto",
+  "type": "record",
+  "name": "ViewAvro",
+  "fields": [
+    {"name": "workId", "type": "long"},
+    {"name": "memberId", "type": "long"},
+    {"name": "viewedAt", "type": {"type": "long", "logicalType": "timestamp-millis"}}
+  ]
+}
